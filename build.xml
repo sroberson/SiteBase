@@ -4,11 +4,11 @@
 
 
 	<!-- staging specific deployment -->
-	<target name="web-resultsbuilderstage" depends="web-resultsbuilderstage-setup,web-deploy">
+	<target name="web-stage" depends="web-stage-setup,web-deploy">
 		<!-- here we can have post-deployment tasks (aka: update specific configs, or something) -->
 	</target>
-	<target name="web-resultsbuilderstage-setup">
-        <property name="public_html">\\.acsysprod.com\acsysweb\atlantichealth-cwb.resultsbuilderstage.com</property>
+	<target name="web-stage-setup">
+        <property name="public_html">\\stage.example.com\dir</property>
         <property name="publish_target">dist</property>
 	</target>
 
