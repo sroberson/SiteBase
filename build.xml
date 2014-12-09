@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="atlantichealth-cwb" default="pre-build">
+
+
+	<!-- staging specific deployment -->
+	<target name="web-resultsbuilderstage" depends="web-resultsbuilderstage-setup,web-deploy">
+		<!-- here we can have post-deployment tasks (aka: update specific configs, or something) -->
+	</target>
+	<target name="web-resultsbuilderstage-setup">
+        <property name="public_html">\\.acsysprod.com\acsysweb\atlantichealth-cwb.resultsbuilderstage.com</property>
+        <property name="publish_target">dist</property>
+	</target>
+
+
+
+	<!-- common deployment logic across all regions -->
+	<!-- implicitly depends on one of the web-xxxxx-setup tasks to set the target properties -->
+
+	<target name="web-deploy" description="Deploy to the target environment" depends="">
+        <property environment="env" />
+        <retry retrycount="3" retrydelay="1000">
+            <sync todir="${public_html}" includeEmptyDirs="true" failonerror="true" overwrite="true">
+                <fileset dir="${publish_target}" />
+                <preserveintarget>
+                    <include name="web.config"/>
+                </preserveintarget>
+            </sync>
+        </retry>
+    </target>
+
+</project>
